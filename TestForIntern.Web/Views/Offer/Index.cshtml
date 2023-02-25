@@ -1,0 +1,32 @@
+﻿@model TestForIntern.Logic.Dtos.OfferDto
+
+@{
+    ViewData["Title"] = "Get Offer";
+}
+
+<div style="padding: 10px;"></div>
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="https://i.scdn.co/image/d011c95081cd9a329e506abd7ded47535d524a07" 
+                 class="img-fluid rounded-start rounded" alt="@Model.Artist">
+        </div>
+        <div class="col-md-4">
+            <div class="card-body">
+                <p class="card-text"><b>Offer Id: </b>@Model.OfferId</p>
+                <p class="card-text"><b>Url: </b>@Model.Url</p>
+                <p class="card-text"><b>Price: </b>@Model.Price.ToString()</p>
+                <p class="card-text"><b>CurrencyId: </b>@Model.CurrencyId</p>
+                <p class="card-text"><b>CategoryId: </b>@Model.CategoryId</p>
+                <p class="card-text"><b>Picture: </b>@Model.Picture</p>
+                <p class="card-text"><b>Delivery: </b>@Model.Delivery.ToString()</p>
+                <p class="card-text"><b>Year: </b>@Model.Year.ToString()</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card-body">
+                <p class="card-text"><b>Description: </b>@Model?.Description</p>
+            </div>
+        </div>
+    </div>
+</div>
