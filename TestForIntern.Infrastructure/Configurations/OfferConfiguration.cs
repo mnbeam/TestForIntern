@@ -10,5 +10,7 @@ public class OfferConfiguration : IEntityTypeConfiguration<Offer>
     {
         builder.HasKey(o => o.Id);
         builder.Property(o => o.Id).ValueGeneratedOnAdd();
+        builder.Property(o => o.Price)
+            .HasColumnType("decimal(18,2)");
     }
 }

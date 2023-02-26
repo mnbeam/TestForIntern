@@ -2,7 +2,7 @@
 
 public class OfferDto
 {
-    public int OfferId { get; set; }
+    public int ExternalOfferId { get; set; }
 
     public string? Url { get; set; }
 

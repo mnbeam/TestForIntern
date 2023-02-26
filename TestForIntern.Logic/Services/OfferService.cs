@@ -18,7 +18,7 @@ internal class OfferService : IOfferService
 
     public async Task<OfferDto> GetOfferById(int offerId)
     {
-        var offer = await _dbContext.Offers.FirstOrDefaultAsync(o => o.OfferId == offerId);
+        var offer = await _dbContext.Offers.FirstOrDefaultAsync(o => o.ExternalOfferId == offerId);
 
         if (offer == null)
         {
@@ -27,13 +27,15 @@ internal class OfferService : IOfferService
 
         return new OfferDto
         {
-            OfferId = offer.OfferId,
+            ExternalOfferId = offer.ExternalOfferId,
             Url = offer.Url,
             Price = offer.Price,
             CurrencyId = offer.CurrencyId,
             CategoryId = offer.CategoryId,
             Picture = offer.Picture,
             Delivery = offer.Delivery,
+            Media = offer.Media,
+            Title = offer.Title,
             Artist = offer.Artist,
             Year = offer.Year,
             Description = offer.Description
@@ -42,22 +44,24 @@ internal class OfferService : IOfferService
 
     public async Task<int> CreateOffer(OfferDto offerDto)
     {
-        var offerIsExist = await _dbContext.Offers.AnyAsync(o => o.OfferId == offerDto.OfferId);
+        var offerIsExist = await _dbContext.Offers.AnyAsync(o => o.ExternalOfferId == offerDto.ExternalOfferId);
 
         if (offerIsExist)
         {
-            return offerDto.OfferId;
+            return offerDto.ExternalOfferId;
         }
 
         var offer = new Offer
         {
-            OfferId = offerDto.OfferId,
+            ExternalOfferId = offerDto.ExternalOfferId,
             Url = offerDto.Url,
             Price = offerDto.Price,
             CurrencyId = offerDto.CurrencyId,
             CategoryId = offerDto.CategoryId,
             Picture = offerDto.Picture,
             Delivery = offerDto.Delivery,
+            Media = offerDto.Media,
+            Title = offerDto.Title,
             Artist = offerDto.Artist,
             Year = offerDto.Year,
             Description = offerDto.Description
@@ -66,7 +70,7 @@ internal class OfferService : IOfferService
         _dbContext.Offers.Add(offer);
         await _dbContext.SaveChangesAsync();
 
-        return offer.Id;
+        return offer.ExternalOfferId;
     }
 
     public async Task<OfferDto> GetOfferFromExternalSourceById(int offerId)
@@ -77,13 +81,15 @@ internal class OfferService : IOfferService
 
         return new OfferDto
         {
-            OfferId = offer.Id,
+            ExternalOfferId = offer.Id,
             Url = offer.Url,
             Price = offer.Price,
             CurrencyId = offer.CurrencyId,
             CategoryId = offer.CategoryId.Text,
             Picture = offer.Picture,
             Delivery = offer.Delivery,
+            Media = offer.Media,
+            Title = offer.Title,
             Artist = offer.Artist,
             Year = offer.Year,
             Description = offer.Description
